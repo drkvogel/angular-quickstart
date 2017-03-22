@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Hero } from './hero';
+import { HeroService } from './hero.service';
 
 // export class Hero {
 //   id: number;
@@ -90,11 +91,13 @@ import { Hero } from './hero';
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `]
+  `],
+  providers: [HeroService]
   //template: `<h1>Hello {{name}}</h1>`,
 })
 
 export class AppComponent  { 
+  constructor(private heroService: HeroService) {}
   title = 'Tour of Heroes';
   // hero: Hero = {
   //   id: 1,
@@ -104,7 +107,10 @@ export class AppComponent  {
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
-  heroes = HEROES;
+  heroes: Hero[];
+  getHeroes(): void {
+    this.heroes = this.heroService.getHeroes();
+  }
   /* public property in AppComponent that exposes the heroes for binding.
   We did not have to define the heroes type. TypeScript can infer it from the HEROES array.
   We could have defined the heroes list here in this component class. But we know that ultimately we’ll get the heroes from a data service. Because we know where we are heading, it makes sense to separate the hero data from the class implementation from the start. */
