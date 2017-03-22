@@ -82,7 +82,9 @@ export class AppComponent implements OnInit  {
   }
   heroes: Hero[];
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    //this.heroes = this.heroService.getHeroes();
+    //this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+    this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
   }
   /* public property in AppComponent that exposes the heroes for binding.
   We did not have to define the heroes type. TypeScript can infer it from the HEROES array.
